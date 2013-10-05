@@ -15,6 +15,7 @@ public class frmCliente extends JFrame implements ActionListener{
 	
 	JTextField txtMensaje;
 	JButton btnEnviar;
+	JButton btnSunbido;
 	
 	public frmCliente(){
 		setSize(400, 400);
@@ -23,11 +24,17 @@ public class frmCliente extends JFrame implements ActionListener{
 		//instanciando los controles;
 		txtMensaje=new JTextField();
 		btnEnviar=new JButton("Enviar",new ImageIcon("../DADSemana01/images/Alerta.png"));
+		btnSunbido = new JButton();
+		btnSunbido.setBounds(150,40,150,50);
+		btnSunbido.setText("Sumbate");
 		txtMensaje.setBounds(10,10,300,20);
 		add(txtMensaje);
 		btnEnviar.setBounds(10, 40, 150, 50);
 		add(btnEnviar);
 		btnEnviar.addActionListener(this);
+		add(btnSunbido);
+		btnSunbido.addActionListener(this);
+		
 		
 		setVisible(true);
 	}
@@ -48,6 +55,24 @@ public class frmCliente extends JFrame implements ActionListener{
 				Socket cli=new Socket("127.0.0.1", 9081);
 				DataOutputStream flujo=new DataOutputStream(cli.getOutputStream()); //Envia datos
 				flujo.writeUTF(txtMensaje.getText().toString());
+				
+				cli.close();
+				
+				
+				
+			} catch (Exception ex) {
+			 JOptionPane.showMessageDialog(null, "Mensaje de Error" + ex.getMessage());
+			}
+			
+		}
+		
+		if(e.getSource()==btnSunbido)
+		{
+			try 
+			{ 
+				Socket cli=new Socket("127.0.0.1", 9081);
+				DataOutputStream flujo=new DataOutputStream(cli.getOutputStream()); //Envia datos
+				flujo.writeUTF("ZUMBAR");
 				
 				cli.close();
 				
