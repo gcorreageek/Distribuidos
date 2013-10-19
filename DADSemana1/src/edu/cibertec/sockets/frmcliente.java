@@ -64,7 +64,7 @@ public class frmcliente extends JFrame implements ActionListener,Runnable {
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnenviar){
 			try {
-				Socket cli=new Socket("127.0.0.1", 9187);
+				Socket cli=new Socket("10.40.28.166", 2222);
 				
 				ObjectOutputStream flujo=new ObjectOutputStream(cli.getOutputStream());
 				Usuario usu=new Usuario();
@@ -93,7 +93,7 @@ public class frmcliente extends JFrame implements ActionListener,Runnable {
 	@Override
 	public void run() {
 		try {
-			ServerSocket serv=new ServerSocket(9999);
+			ServerSocket serv=new ServerSocket(3333);
 			Socket cli;
 			String msg;
 			while(Terminar) {				

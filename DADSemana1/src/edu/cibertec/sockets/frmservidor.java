@@ -70,7 +70,7 @@ public class frmservidor extends JFrame implements Runnable{
 	@Override
 	public void run() {
 		try {
-			ServerSocket serv=new ServerSocket(9187);
+			ServerSocket serv=new ServerSocket(2222);
 			Socket cli;
 			String msg;
 			while(Terminar) {				
@@ -90,24 +90,27 @@ public class frmservidor extends JFrame implements Runnable{
 				//Validar que el usuario no se encuentre
 				usuarios.add(usu);
 				LlenarUsuarios();
+				System.out.println("DD:"+cli.getInetAddress().getHostAddress());
 				
 				
 				try {
-					Socket cli2=new Socket("127.0.0.1", 9999);
 					
-					ObjectOutputStream flujo2=new ObjectOutputStream(cli2.getOutputStream());
-					Usuario usu2=new Usuario();
-//					usu2.setNick("USUARIOS"+Arrays.deepToString(usuarios) );
-					String usuarissss="";
 					for (Usuario u : usuarios) {
+						Socket cli2=new Socket(cli.getInetAddress().getHostAddress(), 3333);
+						
+						ObjectOutputStream flujo2=new ObjectOutputStream(cli2.getOutputStream());
+						Usuario usu2=new Usuario(); 
+						String usuarissss="";
 						usuarissss = usuarissss + u.getNick()+",";
+						
+						usu2.setMensaje(usuarissss);
+						usu2.setIpdestino("");
+						
+						flujo2.writeObject(usu2);
+						
+						cli2.close();
 					}
-					usu2.setMensaje(usuarissss);
-					usu2.setIpdestino("");
 					
-					flujo2.writeObject(usu2);
-					
-					cli2.close();
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null, "Error "+ex.getMessage());
 				}
