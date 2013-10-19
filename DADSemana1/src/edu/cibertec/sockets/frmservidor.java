@@ -1,15 +1,12 @@
 package edu.cibertec.sockets;
 import java.awt.event.ActionEvent;
-
 import java.awt.event.ActionListener;
-import java.io.DataInputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.sql.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -25,7 +22,7 @@ public class frmservidor extends JFrame implements Runnable{
 	boolean Terminar=true;
 	int cont=0;
 	
-	ArrayList<Usuario> usuarios=new ArrayList<>();
+	List<Usuario> usuarios=new ArrayList<>();
 	
 	Timer timer1=new Timer(100, new ActionListener() {		
 		@Override
@@ -99,14 +96,14 @@ public class frmservidor extends JFrame implements Runnable{
 						Socket cli2=new Socket(cli.getInetAddress().getHostAddress(), 3333);
 						
 						ObjectOutputStream flujo2=new ObjectOutputStream(cli2.getOutputStream());
-						Usuario usu2=new Usuario(); 
-						String usuarissss="";
-						usuarissss = usuarissss + u.getNick()+",";
+//						Usuario usu2=new Usuario(); 
+//						String usuarissss="";
+//						usuarissss = usuarissss + u.getNick()+",";
+//						
+//						usu2.setMensaje(usuarissss);
+//						usu2.setIpdestino("");
 						
-						usu2.setMensaje(usuarissss);
-						usu2.setIpdestino("");
-						
-						flujo2.writeObject(usu2);
+						flujo2.writeObject(usuarios);
 						
 						cli2.close();
 					}
@@ -115,15 +112,7 @@ public class frmservidor extends JFrame implements Runnable{
 					JOptionPane.showMessageDialog(null, "Error "+ex.getMessage());
 				}
 				
-				
-				/*Preguntar por el IP Destino
-				si es vacio
-					for arreglo usuarios{
-						sockets a todos
-					}
-				sino
-					 socket al ipdestino
-				 */
+				 
 				
 				txtmensajes.append("\n" + cli.getInetAddress()+ " : "+ msg);
 				if(msg.equals("ZUMBAR")){
