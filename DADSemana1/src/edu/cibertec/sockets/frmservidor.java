@@ -1,5 +1,6 @@
 package edu.cibertec.sockets;
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -15,6 +16,11 @@ import javax.swing.JTextArea;
 import javax.swing.Timer;
 
 import edu.cibertec.beans.Usuario;
+/**
+ * Practica 2 Distribuidos 
+ * @author Gustavo
+ *
+ */
 public class frmservidor extends JFrame implements Runnable{	
 	JTextArea txtmensajes;
 	JComboBox cbousuarios;
