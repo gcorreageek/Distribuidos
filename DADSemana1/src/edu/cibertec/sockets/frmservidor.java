@@ -85,23 +85,25 @@ public class frmservidor extends JFrame implements Runnable{
 				msg=usu.getMensaje();
 				
 				//Validar que el usuario no se encuentre
-				usuarios.add(usu);
-				LlenarUsuarios();
+				boolean deboDeIngresarlo= true;
+				for (Usuario usuuuuuuuik : usuarios) {
+					if(usuuuuuuuik.getNick().equals(usu.getNick())){
+						deboDeIngresarlo = false;
+					}
+				}
+				if(deboDeIngresarlo){
+					usuarios.add(usu);
+					LlenarUsuarios();
+				} 
 				System.out.println("DD:"+cli.getInetAddress().getHostAddress());
 				
 				
 				try {
 					
 					for (Usuario u : usuarios) {
-						Socket cli2=new Socket(cli.getInetAddress().getHostAddress(), 3333);
+						Socket cli2=new Socket(u.getIporigen(), 3333);
 						
-						ObjectOutputStream flujo2=new ObjectOutputStream(cli2.getOutputStream());
-//						Usuario usu2=new Usuario(); 
-//						String usuarissss="";
-//						usuarissss = usuarissss + u.getNick()+",";
-//						
-//						usu2.setMensaje(usuarissss);
-//						usu2.setIpdestino("");
+						ObjectOutputStream flujo2=new ObjectOutputStream(cli2.getOutputStream()); 
 						
 						flujo2.writeObject(usuarios);
 						
